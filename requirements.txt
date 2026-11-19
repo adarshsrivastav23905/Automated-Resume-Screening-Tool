@@ -1,0 +1,8 @@
+streamlit>=1.57
+pandas
+numpy
+scikit-learn
+pdfplumber
+python-docx
+fastapi
+uvicorn

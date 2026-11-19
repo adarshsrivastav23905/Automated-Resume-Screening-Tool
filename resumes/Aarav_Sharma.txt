@@ -1,0 +1,9 @@
+Aarav Sharma
+Data Analyst
+
+Experience: 3 years
+Skills: Python, Pandas, NumPy, SQL, Excel, Power BI, Tableau
+Education: B.Tech in Computer Science
+
+Built SQL dashboards and automated data cleaning workflows using Python.
+Created data visualizations for business teams.

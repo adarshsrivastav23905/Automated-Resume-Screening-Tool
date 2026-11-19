@@ -1,0 +1,5 @@
+candidate,resume_file,match_score,matched_skills,missing_must_have,experience_years,experience_gap,decision,error,similarity_score,skill_coverage,experience_score,nice_to_have_matches
+Aarav_Sharma,Aarav_Sharma.txt,53.1,"pandas, python, sql",machine learning,3.0,0.0,Review,,26.09,75.0,100.0,tableau
+Meera_Patel,Meera_Patel.txt,51.74,"machine learning, pandas, python, sql",,1.0,1.0,Shortlist,,21.35,100.0,50.0,
+Rohan_Verma,Rohan_Verma.txt,39.65,"python, sql","machine learning, pandas",2.5,0.0,Reject,,17.54,50.0,100.0,tableau
+Diya_Iyer,Diya_Iyer.txt,13.65,,"machine learning, pandas, python, sql",4.0,0.0,Reject,,6.65,0.0,100.0,

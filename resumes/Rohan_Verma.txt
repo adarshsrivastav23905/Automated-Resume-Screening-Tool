@@ -1,0 +1,8 @@
+Rohan Verma
+Business Analyst
+
+Experience: 2.5 years
+Skills: Excel, Power BI, SQL, Tableau
+
+Produced reports and dashboards, wrote SQL queries, and communicated results
+to stakeholders. No Python experience.

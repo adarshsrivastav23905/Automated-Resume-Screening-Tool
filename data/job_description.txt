@@ -1,0 +1,15 @@
+Data Analyst
+
+We are looking for a Data Analyst with 2+ years of experience in Python,
+SQL, Pandas, data analysis, data visualization, Excel, and Power BI.
+
+Responsibilities:
+- Analyze datasets and build dashboards
+- Write optimized SQL queries
+- Use Python and Pandas for data cleaning
+- Present insights to stakeholders
+
+Nice to have:
+- Scikit-learn
+- Tableau
+- Machine learning

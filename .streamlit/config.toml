@@ -1,0 +1,17 @@
+[theme]
+base = "light"
+primaryColor = "#315efb"
+backgroundColor = "#f4f7fb"
+secondaryBackgroundColor = "#eef2f7"
+textColor = "#17223b"
+borderColor = "#e6ebf2"
+greenColor = "#1e9e69"
+orangeColor = "#d97706"
+redColor = "#d84d57"
+blueColor = "#315efb"
+baseRadius = "10px"
+buttonRadius = "9px"
+showWidgetBorder = true
+showSidebarBorder = true
+dataframeBorderColor = "#e6ebf2"
+dataframeHeaderBackgroundColor = "#eef2f7"

@@ -1,0 +1,7 @@
+Meera Patel
+Junior Machine Learning Engineer
+
+Experience: 1 year
+Skills: Python, Scikit-learn, Machine Learning, Pandas, SQL
+
+Developed machine learning models and performed exploratory data analysis.

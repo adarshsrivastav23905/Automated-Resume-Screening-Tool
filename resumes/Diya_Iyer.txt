@@ -1,0 +1,7 @@
+Diya Iyer
+Software Developer
+
+Experience: 4 years
+Skills: Java, JavaScript, React, Docker, Git
+
+Built web applications and APIs. Limited data analysis experience.
