@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.screening import score_resumes
+from backend.app.screening import score_resumes
 
 
 def test_demo_ranking(tmp_path: Path) -> None:

@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from src.screening import score_resumes
+from backend.app.screening import score_resumes
 
 
 def parse_args() -> argparse.Namespace:

@@ -4,7 +4,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 
-from src.screening import score_resumes
+from backend.app.screening import score_resumes
 
 
 app = FastAPI(

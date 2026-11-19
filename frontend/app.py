@@ -5,9 +5,10 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-sys.path.insert(0, str(Path(__file__).parent))
-from src.audit_store import get_run, list_runs, save_run
-from src.screening import score_resumes
+project_root = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(project_root))
+from backend.app.audit_store import get_run, list_runs, save_run
+from backend.app.screening import score_resumes
 
 
 st.set_page_config(
@@ -120,7 +121,7 @@ st.markdown(
 )
 
 default_job = ""
-job_path = Path("data/job_description.txt")
+job_path = project_root / "data" / "job_description.txt"
 if job_path.exists():
     default_job = job_path.read_text(encoding="utf-8")
 
