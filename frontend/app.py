@@ -13,63 +13,18 @@ from backend.app.screening import score_resumes
 
 st.set_page_config(
     page_title="HireLens | Screening Intelligence",
-    page_icon=":material/monitoring:",
+    page_icon=":material/analytics:",
     layout="wide",
-)
-
-st.markdown(
-    """
-    <style>
-    .stApp { background: #f4f7fb; }
-    [data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #e6ebf2; }
-    [data-testid="stHeader"] { background: transparent; }
-    [data-testid="stMetric"] {
-        background: #ffffff;
-        border: 1px solid #e6ebf2;
-        border-radius: 12px;
-        padding: 16px 18px;
-        box-shadow: 0 4px 14px rgba(30, 54, 88, 0.04);
-    }
-    [data-testid="stMetricLabel"] { color: #667085 !important; font-size: 0.82rem; }
-    [data-testid="stMetricValue"] { color: #17223b !important; }
-    .brand-row { display:flex; align-items:center; gap:10px; margin: 4px 0 18px; }
-    .brand-mark { width:34px; height:34px; border-radius:9px; background:#315efb; color:white; display:flex; align-items:center; justify-content:center; font-weight:800; }
-    .brand-name { color:#17223b; font-weight:800; letter-spacing:-0.02em; }
-    .page-eyebrow { color:#315efb; font-size:.78rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
-    .page-title { color:#17223b; font-size:2rem; font-weight:760; letter-spacing:-0.035em; margin:2px 0 4px; }
-    .page-subtitle { color:#667085; margin:0 0 18px; }
-    .pipeline { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:18px; }
-    .pipeline div { background:#ffffff; border:1px solid #e6ebf2; border-radius:10px; color:#667085; padding:10px 8px; text-align:center; font-size:.78rem; }
-    .pipeline b { color:#315efb; margin-right:5px; }
-    .stTabs [data-baseweb="tab-list"] { background:#eef2f7; border-radius:10px; padding:4px; gap:2px; }
-    .stTabs [data-baseweb="tab"] { border:0; border-radius:7px; padding:8px 14px; color:#667085; }
-    .stTabs [aria-selected="true"] { background:#ffffff; color:#17223b; box-shadow:0 1px 4px rgba(30,54,88,.08); }
-    .block-container { padding-top:1.25rem; padding-bottom:2rem; max-width:1480px; }
-    [data-testid="stFileUploader"] section { background:#ffffff; border:1px dashed #b9c5d8; border-radius:12px; }
-    .stButton button, .stDownloadButton button { border-radius:9px; font-weight:700; min-height:42px; }
-    </style>
-    """,
-    unsafe_allow_html=True,
 )
 
 if "ranking_results" not in st.session_state:
     st.session_state.ranking_results = None
 
 with st.sidebar:
-    st.markdown(
-        """
-        <div class="brand-row">
-          <div class="brand-mark">HL</div>
-          <div>
-            <div class="brand-name">HireLens</div>
-            <div style="color:#98a2b3;font-size:.74rem;">Recruitment Intelligence</div>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.markdown("#### Screening settings")
-    st.caption("Configure how candidates are evaluated.")
+    st.markdown(":material/track_changes: **HireLens**")
+    st.caption("Recruitment intelligence")
+    st.subheader("Screening settings")
+    st.write("Configure how candidates are evaluated.")
     st.space("small")
     minimum_years = st.number_input(
         "Minimum experience",
@@ -96,29 +51,29 @@ with st.sidebar:
         if similarity_weight + skill_weight + experience_weight == 0:
             st.warning("At least one score weight must be greater than zero.")
     st.space("small")
-    st.caption("Model: TF-IDF Hybrid  •  v2.2")
+    st.badge("TF-IDF hybrid · v2.2", icon=":material/verified:", color="blue")
 
-st.markdown(
-    """
-    <div class="page-eyebrow">Talent operations</div>
-    <div class="page-title">Candidate ranking workspace</div>
-    <p class="page-subtitle">Compare resume evidence against role requirements and review a clear, explainable shortlist.</p>
-    """,
-    unsafe_allow_html=True,
+st.badge("HIRELENS · TALENT INTELLIGENCE", icon=":material/auto_awesome:", color="green")
+st.title("Talent decisions, backed by evidence.")
+st.write(
+    "A clear, human-led workspace for comparing role requirements with candidate experience."
+)
+st.info(
+    "Scores support recruiter judgment. Candidates missing must-have skills are flagged for review.",
+    icon=":material/verified_user:",
 )
 
-st.markdown(
-    """
-    <div class="pipeline">
-      <div><b>01</b>Extract</div>
-      <div><b>02</b>Normalize</div>
-      <div><b>03</b>Match skills</div>
-      <div><b>04</b>Compute score</div>
-      <div><b>05</b>Rank candidates</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+workflow_cols = st.columns(3)
+workflow_steps = [
+    ("green", ":material/edit_document:", "01 · ROLE PROFILE", "Define the role", "Add the role brief and key skills."),
+    ("blue", ":material/description:", "02 · CANDIDATE POOL", "Review candidates", "Bring resumes together in one workspace."),
+    ("orange", ":material/insights:", "03 · EVIDENCE REVIEW", "Compare evidence", "Explore fit, skill matches, and gaps."),
+]
+for column, (accent, icon, step, title, description) in zip(workflow_cols, workflow_steps):
+    with column.container(border=True):
+        st.badge(step, color=accent)
+        st.markdown(f":{accent}[{icon}] **{title}**")
+        st.write(description)
 
 default_job = ""
 job_path = project_root / "data" / "job_description.txt"
@@ -128,26 +83,33 @@ if job_path.exists():
 with st.form("screening_form"):
     input_col, upload_col = st.columns([1.55, 1], gap="large")
     with input_col:
-        st.subheader("Job requirements")
-        job_description = st.text_area(
-            "Job description",
-            value=default_job,
-            height=260,
-            label_visibility="collapsed",
-            placeholder="Paste the role description and required skills here...",
-        )
+        with st.container(border=True):
+            st.subheader("Job requirements", divider="green")
+            st.write("Use the role description to provide context for candidate matching.")
+            job_description = st.text_area(
+                "Job description",
+                value=default_job,
+                height=260,
+                placeholder="Paste the role description and required skills here...",
+            )
     with upload_col:
-        st.subheader("Candidate inputs")
-        uploaded_files = st.file_uploader(
-            "Upload resumes",
-            type=["txt", "pdf", "docx"],
-            accept_multiple_files=True,
-            help="TXT, PDF, and DOCX files are supported",
-        )
-        if uploaded_files:
-            st.success(f"{len(uploaded_files)} resume(s) ready", icon=":material/upload_file:")
-        else:
-            st.caption("No resume files selected.")
+        with st.container(border=True):
+            st.subheader("Candidate resumes", divider="blue")
+            st.write("Add one or more files to compare against the role.")
+            uploaded_files = st.file_uploader(
+                "Upload resumes",
+                type=["txt", "pdf", "docx"],
+                accept_multiple_files=True,
+                help="TXT, PDF, and DOCX files are supported",
+            )
+            if uploaded_files:
+                st.badge(
+                    f"{len(uploaded_files)} resume(s) ready",
+                    icon=":material/check_circle:",
+                    color="green",
+                )
+            else:
+                st.write("No resumes selected yet.")
 
     submitted = st.form_submit_button(
         "Run screening analysis",
@@ -216,18 +178,25 @@ if results is not None:
     rejected = int((results["decision"] == "Reject").sum())
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Candidates analyzed", total, border=True)
-    col2.metric("Shortlisted", shortlisted, border=True)
-    col3.metric("Needs review", review, border=True)
-    col4.metric("Rejected", rejected, border=True)
+    col1.metric(
+        ":blue[:material/groups: Candidates analyzed]",
+        total,
+        border=True,
+        help="Total resumes in this screening run.",
+    )
+    col2.metric(":green[:material/check_circle: Shortlisted]", shortlisted, border=True)
+    col3.metric(":orange[:material/visibility: Needs review]", review, border=True)
+    col4.metric(":red[:material/block: Rejected]", rejected, border=True)
 
     ranking_tab, analytics_tab, history_tab = st.tabs([
-        "Ranking report",
-        "Score analytics",
-        "Run history",
+        ":material/table_chart: Ranking report",
+        ":material/analytics: Score analytics",
+        ":material/history: Run history",
     ])
 
     with ranking_tab:
+        st.subheader("Candidate results")
+        st.write("Select a candidate row to inspect matched and missing requirements.")
         display = results.copy()
         filter_col, search_col = st.columns([1, 2])
         with filter_col:
@@ -294,6 +263,8 @@ if results is not None:
         )
 
     with analytics_tab:
+        st.subheader("Score analytics")
+        st.write("Compare overall fit and the components behind each candidate score.")
         chart_data = results.sort_values("match_score", ascending=True)
         st.bar_chart(
             chart_data,
@@ -311,12 +282,14 @@ if results is not None:
             horizontal=True,
             stack=False,
         )
-        st.caption("The first chart shows final ranks; the second separates score components.")
+        st.write("The first chart shows final ranks; the second separates score components.")
 
     with history_tab:
+        st.subheader("Previous screening runs")
+        st.write("Review saved results from earlier analyses.")
         history = list_runs()
         if history.empty:
-            st.caption("No completed screening runs yet.")
+            st.write("No completed screening runs yet.")
         else:
             selected_run = st.selectbox(
                 "Saved screening run",
